@@ -1,0 +1,31 @@
+λ ~/ python3 Random\ Forest.py
+running with max depth  17
+validation score 0.6529064565222629
+running with max depth  18
+validation score 0.6540056599035963
+running with max depth  19
+validation score 0.6546233475315106
+running with max depth  20
+validation score 0.65459895950021
+running with max depth  21
+validation score 0.6540719911790974
+running with max depth  22
+validation score 0.6533443601369322
+running with max depth  23
+validation score 0.6524407171279073
+running with max depth  24
+validation score 0.6524281505921636
+running with max depth  25
+validation score 0.6521708154136154
+running with max depth  26
+validation score 0.6514785786466328
+running with max depth  27
+validation score 0.6511599702227382
+running with max depth  28
+validation score 0.6507136630233061
+running with max depth  29
+validation score 0.6513287499288563
+Predicting
+0.6560270606024903
+10.309998002783683
+
