@@ -1,0 +1,127 @@
+λ ~/ python3 Random\ Forest.py 
+running with max depth 1
+depth:  1 score:  0.13101362692354102
+running with max depth 2
+depth:  2 score:  0.21373045808419722
+running with max depth 3
+depth:  3 score:  0.26838298454183457
+running with max depth 4
+depth:  4 score:  0.3303313419093624
+running with max depth 5
+depth:  5 score:  0.38990929976042227
+running with max depth 6
+depth:  6 score:  0.442825385431841
+running with max depth 7
+depth:  7 score:  0.49365160445511747
+running with max depth 8
+depth:  8 score:  0.5368293950493712
+running with max depth 9
+depth:  9 score:  0.5726627229498902
+running with max depth 10
+depth:  10 score:  0.6021276778337236
+running with max depth 11
+depth:  11 score:  0.6243639944574282
+running with max depth 12
+depth:  12 score:  0.6409688558382788
+running with max depth 13
+depth:  13 score:  0.6527848794842017
+running with max depth 14
+depth:  14 score:  0.660157997139318
+running with max depth 15
+depth:  15 score:  0.6652038361293281
+running with max depth 16
+depth:  16 score:  0.6676986268795434
+running with max depth 17
+depth:  17 score:  0.6695057121730366
+running with max depth 18
+depth:  18 score:  0.6703005368929638
+running with max depth 19
+depth:  19 score:  0.6714936286003194
+running with max depth 20
+depth:  20 score:  0.6712772902067914
+running with max depth 21
+depth:  21 score:  0.6707593155335265
+running with max depth 22
+depth:  22 score:  0.6706918724287338
+running with max depth 23
+depth:  23 score:  0.670386590025961
+running with max depth 24
+depth:  24 score:  0.6706045596494581
+running with max depth 25
+depth:  25 score:  0.6704875033578199
+running with max depth 26
+depth:  26 score:  0.6706452037958908
+running with max depth 27
+depth:  27 score:  0.6702386956831532
+running with max depth 28
+depth:  28 score:  0.6698364656919547
+running with max depth 29
+depth:  29 score:  0.6705559985758803
+running with max depth 1
+depth:  1 score:  0.13101362692354102
+running with max depth 2
+depth:  2 score:  0.21373045808419722
+running with max depth 3
+depth:  3 score:  0.26838298454183457
+running with max depth 4
+depth:  4 score:  0.3303313419093624
+running with max depth 5
+depth:  5 score:  0.38990929976042227
+running with max depth 6
+depth:  6 score:  0.442825385431841
+running with max depth 7
+depth:  7 score:  0.49365160445511747
+running with max depth 8
+depth:  8 score:  0.5368293950493712
+running with max depth 9
+depth:  9 score:  0.5726627229498902
+running with max depth 10
+depth:  10 score:  0.6021276778337236
+running with max depth 11
+depth:  11 score:  0.6243639944574282
+running with max depth 12
+depth:  12 score:  0.6409688558382788
+running with max depth 13
+depth:  13 score:  0.6527848794842017
+running with max depth 14
+depth:  14 score:  0.6601579971393181
+running with max depth 15
+depth:  15 score:  0.6652038361293281
+running with max depth 16
+depth:  16 score:  0.6676986268795434
+running with max depth 17
+depth:  17 score:  0.6695057121730366
+running with max depth 18
+depth:  18 score:  0.6703005368929638
+running with max depth 19
+depth:  19 score:  0.6714936286003194
+running with max depth 20
+depth:  20 score:  0.6712772902067914
+running with max depth 21
+depth:  21 score:  0.6707593155335265
+running with max depth 22
+depth:  22 score:  0.6706918724287338
+running with max depth 23
+depth:  23 score:  0.670386590025961
+running with max depth 24
+depth:  24 score:  0.6706045596494581
+running with max depth 25
+depth:  25 score:  0.6704875033578199
+running with max depth 26
+depth:  26 score:  0.6706452037958908
+running with max depth 27
+depth:  27 score:  0.6702386956831532
+running with max depth 28
+depth:  28 score:  0.6698364656919547
+running with max depth 29
+depth:  29 score:  0.6705559985758803
+Math -1.1947257899658226e-05
+Read -1.1947257899658226e-05
+Math Delta 18.68842681566473
+Reading Delta 18.68842681566473
+
+Math 0.6733321470425826
+Read 0.6733321470425826
+Math Delta 9.727706885744265
+Reading Delta 9.727706885744263
+
