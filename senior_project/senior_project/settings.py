@@ -72,11 +72,13 @@ WSGI_APPLICATION = 'senior_project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+DATABASE_ENGINE = 'sqlite3'
+DATABASE_NAME = '/Users/antonsmolka/Desktop/Senior_Project/Database/Senior_Project_DB.sqlite'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': '/Users/antonsmolka/Desktop/Senior_Project/Database/Senior_Project_DB.sqlite',
     }
 }
 
