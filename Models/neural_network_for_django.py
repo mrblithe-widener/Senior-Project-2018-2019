@@ -41,14 +41,14 @@ from tensorflow import set_random_seed
 set_random_seed(RANDOM_STATE)
 
 #Loading the data with pandas
-math_scores = pd.read_csv("../Data/math.csv")
-read = pd.read_csv("../Data/read.csv")
-business = pd.read_csv("../Data/BUSSINES.csv")
-geo = pd.read_csv("../Data/geo.csv", low_memory=False)
-funding = pd.read_csv("../Data/FUNDING.csv")
-income = pd.read_csv("../Data/income.csv")
-teachers = pd.read_csv("../Data/Teacher Ratios.csv")
-title1 = pd.read_csv("../Data/title1.csv")
+math_scores = pd.read_csv("../DB_Export/math.csv")
+read = pd.read_csv("../DB_Export/read.csv")
+business = pd.read_csv("../DB_Export/BUSSINES.csv")
+geo = pd.read_csv("../DB_Export/geo.csv", low_memory=False)
+funding = pd.read_csv("../DB_Export/FUNDING.csv")
+income = pd.read_csv("../DB_Export/income.csv")
+teachers = pd.read_csv("../DB_Export/Teacher Ratios.csv")
+title1 = pd.read_csv("../DB_Export/title1.csv")
 #Set indexs
 math_scores = math_scores.set_index("math_ncessch")
 read = read.set_index("read_ncessch")
