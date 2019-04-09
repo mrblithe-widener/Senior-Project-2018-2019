@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SeniorProjectWebsite
+namespace SeniorProjectWebsite.Models
 {
     public partial class Income
     {

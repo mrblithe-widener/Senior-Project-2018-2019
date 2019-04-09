@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace SeniorProjectWebsite
+namespace SeniorProjectWebsite.Models
 {
     public partial class seniorprojectContext : DbContext
     {
@@ -19,7 +19,8 @@ namespace SeniorProjectWebsite
         public virtual DbSet<Funding> Funding { get; set; }
         public virtual DbSet<Geo> Geo { get; set; }
         public virtual DbSet<Income> Income { get; set; }
-        public virtual DbSet<Math> Math { get; set; }
+        public virtual DbSet<Index> Index { get; set; }
+        public virtual DbSet<SeniorProjectWebsite.Models.Math> Math { get; set; }
         public virtual DbSet<Read> Read { get; set; }
         public virtual DbSet<TeacherRatios> TeacherRatios { get; set; }
         public virtual DbSet<Title1> Title1 { get; set; }
@@ -374,6 +375,32 @@ namespace SeniorProjectWebsite
                 entity.Property(e => e.ToalIncomeAmount).HasColumnName("toal_income_amount");
 
                 entity.Property(e => e.UnemployeementAmount).HasColumnName("unemployeement_amount");
+            });
+
+            modelBuilder.Entity<Index>(entity =>
+            {
+                entity.HasKey(e => e.Nceesch)
+                    .HasName("index_pk");
+
+                entity.ToTable("index");
+
+                entity.Property(e => e.Nceesch)
+                    .HasColumnName("nceesch")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.CountyName).HasColumnName("county_name");
+
+                entity.Property(e => e.Leaid)
+                    .HasColumnName("leaid")
+                    .HasColumnType("numeric");
+
+                entity.Property(e => e.Name).HasColumnName("name");
+
+                entity.Property(e => e.State).HasColumnName("state");
+
+                entity.Property(e => e.Zip)
+                    .HasColumnName("zip")
+                    .HasColumnType("numeric");
             });
 
             modelBuilder.Entity<Math>(entity =>

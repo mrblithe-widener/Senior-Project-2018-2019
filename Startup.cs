@@ -21,6 +21,9 @@ namespace SeniorProjectWebsite
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+           /*  services.AddEntityFrameworkNpgsql()
+               .AddDbContext<seniorprojectContext>()
+               .BuildServiceProvider();*/
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
