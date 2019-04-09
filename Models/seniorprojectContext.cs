@@ -15,7 +15,7 @@ namespace SeniorProjectWebsite.Models
         {
         }
 
-        public virtual DbSet<Bussines> Bussines { get; set; }
+        public virtual DbSet<Business> Bussines { get; set; }
         public virtual DbSet<Funding> Funding { get; set; }
         public virtual DbSet<Geo> Geo { get; set; }
         public virtual DbSet<Income> Income { get; set; }
@@ -37,7 +37,7 @@ namespace SeniorProjectWebsite.Models
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.3-servicing-35854");
 
-            modelBuilder.Entity<Bussines>(entity =>
+            modelBuilder.Entity<Business>(entity =>
             {
                 entity.HasKey(e => e.ZipCode)
                     .HasName("BUSSINES_pkey");

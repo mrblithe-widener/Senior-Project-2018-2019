@@ -1,1 +1,0 @@
- dotnet-aspnet-codegenerator controller -name "BusinessController" -api -m SeniorProjectWebsite.Models.Bussines -dc seniorprojectContext -outDir Controllers -namespace SeniorProjectWebsite.Controllers

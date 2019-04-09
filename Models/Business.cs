@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SeniorProjectWebsite.Models
 {
-    public partial class Bussines
+    public partial class Business
     {
         public string GeoId { get; set; }
         public int? GeoId2 { get; set; }
