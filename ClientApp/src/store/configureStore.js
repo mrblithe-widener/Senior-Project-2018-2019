@@ -4,12 +4,14 @@ import { routerReducer, routerMiddleware } from 'react-router-redux';
 import * as Counter from './Counter';
 import * as WeatherForecasts from './WeatherForecasts';
 import * as School from "./School";
+import * as Search from "./Search";
 
 export default function configureStore (history, initialState) {
   const reducers = {
-    counter: Counter.reducer,
-    weatherForecasts: WeatherForecasts.reducer,
-    school:School.reducer
+      counter: Counter.reducer,
+      weatherForecasts: WeatherForecasts.reducer,
+      school: School.reducer,
+      search: Search.reducer
   };
 
   const middleware = [
