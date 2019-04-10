@@ -40,7 +40,12 @@ namespace SeniorProjectWebsite.Controllers
 
             return index;
         }
-
+        [HttpGet("SearchName/{name}")]
+        public async Task<ActionResult<IEnumerable<Index>>> SearchName(string name)
+        {
+            string name_lower = name.ToLower();
+            return await _context.Index.Where(x => x.Name.ToLower().Contains(name_lower)).Take(10).ToListAsync();
+        }
         // PUT: api/Index/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutIndex(long id, Index index)
