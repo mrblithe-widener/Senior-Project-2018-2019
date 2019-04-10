@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SeniorProjectWebsite.Models;
-
+using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 namespace SeniorProjectWebsite
 {
     public class Startup
@@ -23,8 +25,9 @@ namespace SeniorProjectWebsite
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
              services.AddEntityFrameworkNpgsql()
-               .AddDbContext<seniorprojectContext>()
-               .BuildServiceProvider();
+               .AddDbContext<seniorprojectContext>(options => 
+					options.UseNpgsql(Configuration.GetConnectionString("seniordb"))
+			   ).BuildServiceProvider();
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
