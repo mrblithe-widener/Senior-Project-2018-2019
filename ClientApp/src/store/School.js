@@ -6,7 +6,7 @@ const initalState = {Math_Scores:undefined};
 export const actionCreators = {
     requestMath:ncessch => async (dispatch, getState)=>{
         const url = `api/Math/${ncessch}`;
-        const scores = makeApiCall(url);
+        const scores = await makeApiCall(url);
         dispatch({type:requestMath, Math_Scores:scores});
     }
 }

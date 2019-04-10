@@ -1,4 +1,7 @@
-﻿export async function makeApiCall(url) {
+﻿export const NOT_FOUND = "Not Found";
+export const SERVER_ERROR = "A server error occured";
+
+export async function makeApiCall(url) {
     try {
         const response = await fetch(url);
         if (!response.ok) {
