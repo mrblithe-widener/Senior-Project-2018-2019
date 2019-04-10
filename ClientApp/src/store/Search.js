@@ -9,8 +9,8 @@ export const actionCreators = {
         if (!name || name == "" || name.match(/^\s*$/)) {
             dispatch({ type: requestSearch, results: undefined })
         } else {
+            const url =name.match(/\d{5}/)? `/api/Index/SearchZip/${name.trim()}`:`/api/Index/SearchName/${name}`
             try {
-                const url = `/api/Index/SearchName/${name}`;
                 const results = await makeApiCall(url);
                 dispatch({ type: requestSearch, results: results });
             } catch (e) {

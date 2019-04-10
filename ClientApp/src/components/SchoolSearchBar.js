@@ -22,6 +22,7 @@ class SchoolSearchBar extends React.Component {
                 <div>
                     <ListGroup>
                         {this.props.searchResults.map((x, i) => <ListGroupItem key={i}>{`${x.name}, ${x.countyName}, ${x.state}`} </ListGroupItem>)}
+                        <ListGroupItem> Can't find what your looking for? Try entering the zip code where the school is located. </ListGroupItem>
                     </ListGroup>
                 </div>
                 :null

@@ -40,6 +40,14 @@ namespace SeniorProjectWebsite.Controllers
 
             return index;
         }
+        [HttpGet("SearchZip/{zip}")]
+        public async Task<ActionResult<IEnumerable<Index>>> SearchZip(string zip)
+        {
+            decimal zipcode;
+            if (!decimal.TryParse(zip, out zipcode))
+                return BadRequest();
+            return await _context.Index.Where(x => x.Zip.HasValue && x.Zip.Value == zipcode).ToListAsync();
+        }
         [HttpGet("SearchName/{name}")]
         public async Task<ActionResult<IEnumerable<Index>>> SearchName(string name)
         {
