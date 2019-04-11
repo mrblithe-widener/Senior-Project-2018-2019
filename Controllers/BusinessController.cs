@@ -40,5 +40,5 @@ namespace SeniorProjectWebsite.Controllers
 
             return business;
         }
-
+    }
 }

@@ -54,35 +54,5 @@ namespace SeniorProjectWebsite.Controllers
             string name_lower = name.ToLower();
             return await _context.Index.Where(x => x.Name.ToLower().Contains(name_lower)).Take(10).ToListAsync();
         }
-        // PUT: api/Index/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutIndex(long id, Index index)
-        {
-            if (id != index.Nceesch)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(index).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!IndexExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
     }
 }
