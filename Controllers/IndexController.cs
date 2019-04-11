@@ -84,49 +84,5 @@ namespace SeniorProjectWebsite.Controllers
             return NoContent();
         }
 
-        // POST: api/Index
-        [HttpPost]
-        public async Task<ActionResult<Index>> PostIndex(Index index)
-        {
-            _context.Index.Add(index);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (IndexExists(index.Nceesch))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtAction("GetIndex", new { id = index.Nceesch }, index);
-        }
-
-        // DELETE: api/Index/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Index>> DeleteIndex(long id)
-        {
-            var index = await _context.Index.FindAsync(id);
-            if (index == null)
-            {
-                return NotFound();
-            }
-
-            _context.Index.Remove(index);
-            await _context.SaveChangesAsync();
-
-            return index;
-        }
-
-        private bool IndexExists(long id)
-        {
-            return _context.Index.Any(e => e.Nceesch == id);
-        }
     }
 }
