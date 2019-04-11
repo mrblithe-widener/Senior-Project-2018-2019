@@ -1,13 +1,63 @@
 import {makeApiCall} from "../utils/ApiHelper"
 const requestMath = "REQUEST_MATH";
+const requestRead = "REQUEST_READ";
+const requestBusiness = "REQUEST_BUSINESS";
+const requestFunding = "REQUEST_FUNDING";
+const requestGeo = "REQUEST_GEO";
+const requestIncome = "REQUEST_INCOME";
+const requestIndex = "REQUEST_INDEX";
+const requestTeacherRatios = "REQUEST_TEACHER_RATIOS";
+const requestTitle1 = "REQUEST_TITLE1";
 
-const initalState = {Math_Scores:undefined};
+const initalState = 
+    {Math_Scores:undefined, 
+        Read_Scores:undefined,
+        Business:undefined,
+        Funding:undefined,
+        Geo:undefined,
+        Income:undefined,
+        Index:undefined,
+        TeacherRatios:undefined,
+        Title1:undefined
+    };
 
 export const actionCreators = {
     requestMath:ncessch => async (dispatch, getState)=>{
         const url = `api/Math/${ncessch}`;
         const scores = await makeApiCall(url);
         dispatch({type:requestMath, Math_Scores:scores});
+    }, requestRead:ncessch => async (dispatch, getState)=>{
+        const url = `api/Read/${ncessch}`;
+        const scores = await makeApiCall(url);
+        dispatch({type:requestRead, Read_Scores:scores});
+    }, requestBusiness:zipcode => async (dispatch, getState)=>{
+        const url = `api/Business/${zipcode}`;
+        const result = await makeApiCall(url);
+        dispatch({type:requestBusiness, Business:result});
+    }, requestFunding:leaid => async (dispatch, getState)=>{
+        const url = `api/Funding/${leaid}`;
+        const result = await makeApiCall(url);
+        dispatch({type:requestFunding, Funding:result});
+    }, requestGeo:ncessch => async (dispatch, getState)=>{
+        const url = `api/Geo/${ncessch}`;
+        const result = await makeApiCall(url);
+        dispatch({type:requestGeo, Geo:result});
+    }, requestIncome:zipcode => async (dispatch, getState)=>{
+        const url = `api/Income/${zipcode}`;
+        const result = await makeApiCall(url);
+        dispatch({type:requestIncome, Income:result});
+    },  requestIndex:ncessch => async (dispatch, getState)=>{
+        const url = `api/Index/${ncessch}`;
+        const result = await makeApiCall(url);
+        dispatch({type:requestIndex, Index:result});
+    }, requestTeacherRatios:ncessch => async (dispatch, getState)=>{
+        const url = `api/TeacherRatios/${ncessch}`;
+        const result = await makeApiCall(url);
+        dispatch({type:requestTeacherRatios, TeacherRatios:result});
+    }, requestTitle1:ncessch => async (dispatch, getState)=>{
+        const url = `api/Title1/${ncessch}`;
+        const result = await makeApiCall(url);
+        dispatch({type:requestTitle1, Title1:result});
     }
 }
 
@@ -19,8 +69,24 @@ export const actionCreators = {
 export const reducer = (state, action)=>{
     switch(action.type){
         case requestMath:
-        return {...state, Math_Scores:action.Math_Scores};
+            return {...state, Math_Scores:action.Math_Scores};
+        case requestRead:
+            return {...state, Read_Scores: action.Read_Scores};
+        case requestBusiness:
+            return {...state, Business: action.Business};
+        case requestFunding:
+            return {...state, Funding: action.Funding};
+        case requestGeo:
+            return {...state, Geo:action.Geo};
+        case requestIncome:
+            return {...state, Income:action.Income};
+        case requestIndex:
+            return {...state, Index:action.Index};
+        case requestTeacherRatios:
+            return {...state, TeacherRatios:action.TeacherRatios};
+        case requestTitle1:
+            return {...state, Title1:action.Title1};
         default:
-        return state || initalState;
+            return state || initalState;
     }
 }
