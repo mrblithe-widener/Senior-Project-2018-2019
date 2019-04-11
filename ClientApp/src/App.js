@@ -11,6 +11,6 @@ export default () => (
     <Route exact path='/' component={Home} />
     <Route path='/counter' component={Counter} />
     <Route path='/fetch-data/:startDateIndex?' component={FetchData} />
-    <Route path='/School' component={SchoolDisplay} />
+    <Route path='/School/:ncesschid' component={SchoolDisplay} />
   </Layout>
 );

@@ -24,7 +24,6 @@ export const actionCreators = {
 }
 
 export const reducer = (state, action) => {
-    console.log((action));
     switch (action.type) {
         case requestSearch:
             return { ...state, results: action.results };

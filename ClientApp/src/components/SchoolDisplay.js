@@ -12,6 +12,7 @@ class SchoolDisplay extends React.Component{
     render(){
         return (<div>
             <SchoolSearchBar />
+            {this.props.match.params.ncesschid}
              </div>);
     }
 }
