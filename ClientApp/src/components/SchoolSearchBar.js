@@ -12,11 +12,14 @@ class SchoolSearchBar extends React.Component {
     onInputChange(e) {
         this.props.requestSearch(e.currentTarget.value);
     }
+    handleSubmit(e){
+        e.preventDefault();
+    }
     render() {
         return (<div>
-            <Form>
+            <Form onSubmit={this.handleSubmit.bind(this)}>
                 <FormGroup>
-                    <Input type="text" name="school_name" id="school_name" onChange={this.onInputChange.bind(this)} placeholder="Start typing a school name" />
+                    <Input type="text" autoComplete="off" name="school_name" id="school_name" onChange={this.onInputChange.bind(this)} placeholder="Start typing a school name" />
                 </FormGroup>
             </Form>
             {this.props.searchResults && this.props.searchResults.length > 0 ?
