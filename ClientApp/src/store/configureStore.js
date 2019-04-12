@@ -5,13 +5,15 @@ import * as Counter from './Counter';
 import * as WeatherForecasts from './WeatherForecasts';
 import * as School from "./School";
 import * as Search from "./Search";
+import * as Loading from "./Loading";
 
 export default function configureStore (history, initialState) {
   const reducers = {
       counter: Counter.reducer,
       weatherForecasts: WeatherForecasts.reducer,
       school: School.reducer,
-      search: Search.reducer
+      search: Search.reducer,
+      loading: Loading.reducer
   };
 
   const middleware = [

@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {actionCreators} from "../store/School";
 import { bindActionCreators } from "redux";
 import SchoolSearchBar from "./SchoolSearchBar";
+import LoadingDisplay from "./LoadingDisplay";
 
 class SchoolDisplay extends React.Component{
 
@@ -18,11 +19,9 @@ class SchoolDisplay extends React.Component{
             this.setState({hasRequestedIndex:true});
             this.props.requestIndex(this.props.match.params.ncesschid);
         }
-        //this.props.requestMath("421476001901");
     }
 
     componentWillReceiveProps(newProps){
-        console.log(newProps)
         if(newProps.Index && !this.props.Index){
             this.setState({hasRequestedOthers:true});
             this.props.requestMath(newProps.Index.nceesch);
@@ -40,6 +39,7 @@ class SchoolDisplay extends React.Component{
 
     render(){
         return (<div>
+            <LoadingDisplay />
             {this.props.match.params.ncesschid}
              </div>);
     }

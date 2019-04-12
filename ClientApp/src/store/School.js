@@ -1,4 +1,5 @@
 import {makeApiCall} from "../utils/ApiHelper"
+import { startLoading, stopLoading } from "./Loading";
 const requestMath = "REQUEST_MATH";
 const requestRead = "REQUEST_READ";
 const requestBusiness = "REQUEST_BUSINESS";
@@ -23,40 +24,58 @@ const initalState =
 
 export const actionCreators = {
     requestMath:ncessch => async (dispatch, getState)=>{
+        dispatch({type:startLoading});
         const url = `api/Math/${ncessch}`;
         const scores = await makeApiCall(url);
+        dispatch({type:stopLoading});
         dispatch({type:requestMath, Math_Scores:scores});
     }, requestRead:ncessch => async (dispatch, getState)=>{
+        dispatch({type:startLoading});
         const url = `api/Read/${ncessch}`;
         const scores = await makeApiCall(url);
+        dispatch({type:stopLoading});
         dispatch({type:requestRead, Read_Scores:scores});
     }, requestBusiness:zipcode => async (dispatch, getState)=>{
+        dispatch({type:startLoading});
         const url = `api/Business/${zipcode}`;
         const result = await makeApiCall(url);
+        dispatch({type:stopLoading});
         dispatch({type:requestBusiness, Business:result});
     }, requestFunding:leaid => async (dispatch, getState)=>{
+        dispatch({type:startLoading});
         const url = `api/Funding/${leaid}`;
         const result = await makeApiCall(url);
+        dispatch({type:stopLoading});
         dispatch({type:requestFunding, Funding:result});
     }, requestGeo:ncessch => async (dispatch, getState)=>{
+        dispatch({type:startLoading});
         const url = `api/Geo/${ncessch}`;
         const result = await makeApiCall(url);
+        dispatch({type:stopLoading});
         dispatch({type:requestGeo, Geo:result});
     }, requestIncome:zipcode => async (dispatch, getState)=>{
+        dispatch({type:startLoading});
         const url = `api/Income/${zipcode}`;
         const result = await makeApiCall(url);
+        dispatch({type:stopLoading});
         dispatch({type:requestIncome, Income:result});
     },  requestIndex:ncessch => async (dispatch, getState)=>{
+        dispatch({type:startLoading});
         const url = `api/Index/${ncessch}`;
         const result = await makeApiCall(url);
+        dispatch({type:stopLoading});
         dispatch({type:requestIndex, Index:result});
     }, requestTeacherRatios:ncessch => async (dispatch, getState)=>{
+        dispatch({type:startLoading});
         const url = `api/TeacherRatios/${ncessch}`;
         const result = await makeApiCall(url);
+        dispatch({type:stopLoading});
         dispatch({type:requestTeacherRatios, TeacherRatios:result});
     }, requestTitle1:ncessch => async (dispatch, getState)=>{
+        dispatch({type:startLoading});
         const url = `api/Title1/${ncessch}`;
         const result = await makeApiCall(url);
+        dispatch({type:stopLoading});
         dispatch({type:requestTitle1, Title1:result});
     }
 }
