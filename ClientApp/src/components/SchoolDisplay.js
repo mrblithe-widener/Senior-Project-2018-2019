@@ -45,7 +45,7 @@ class SchoolDisplay extends React.Component{
     }
 }
 
-export default connect((state) => {console.log(state); return {
+export default connect((state) => {return {
         Math_Scores:state.school.Math_Scores, 
         Read_Scores:state.school.Read_Scores,
         Business:state.school.Business,
