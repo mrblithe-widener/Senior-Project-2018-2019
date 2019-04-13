@@ -3,4 +3,5 @@
 FROM microsoft/dotnet:aspnetcore-runtime
 WORKDIR /usr/SPW/
 COPY bin/Release/netcoreapp2.2/publish/ .
-CMD ["dotnet", "SeniorProjectWebsite.dll"]
+COPY config .
+CMD ASPNETCORE_URLS=http://*:$PORT; dotnet SeniorProjectWebsite.dll
