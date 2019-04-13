@@ -46,7 +46,8 @@ class SchoolDisplay extends React.Component{
         return (<div>
 			<ErrorDisplay />
             <LoadingDisplay />
-            {this.props.match.params.ncesschid}
+            {<h4>{this.props.Math_Scores ? this.props.Math_Scores.mathSchnam + ", " + this.props.Math_Scores.mathLeanm : null}</h4>}
+            {<h5>{this.props.Geo ? this.props.Geo.street + ", " + this.props.Geo.city + ", " + this.props.Geo.state + ", " + this.props.Geo.zip : null} </h5>
              </div>);
     }
 }
