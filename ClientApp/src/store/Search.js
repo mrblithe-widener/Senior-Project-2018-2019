@@ -1,4 +1,5 @@
 ﻿import { makeApiCall, NOT_FOUND } from "../utils/ApiHelper";
+import {createError} from "./Error";
 
 const requestSearch = "REQUEST_SEARCH";
 
@@ -17,7 +18,7 @@ export const actionCreators = {
                 if (e.message == NOT_FOUND)
                     dispatch({ type: requestSearch, results: undefined })
                 else
-                    throw e;
+                    dispatch({type: createError, errorMessage:e.message});
             }
         }
     }

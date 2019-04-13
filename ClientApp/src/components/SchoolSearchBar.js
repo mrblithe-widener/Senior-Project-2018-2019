@@ -3,15 +3,20 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Form, FormGroup, ListGroup, ListGroupItem, Input } from "reactstrap";
 import {actionCreators} from "../store/Search"
+import {errorActionCreators} from "../store/Error";
 import {Link} from "react-router-dom";
+import ErrorDisplay from "./ErrorDisplay";
 
 class SchoolSearchBar extends React.Component {
     constructor(props){
         super(props);
         this.state = {hideSearch:true}
     }
+	componentWillUnmount(){
+        this.props.error.clearError();	
+	}
     onInputChange(e) {
-        this.props.requestSearch(e.currentTarget.value);
+        this.props.search.requestSearch(e.currentTarget.value);
     }
     handleSubmit(e){
         e.preventDefault();
@@ -40,6 +45,7 @@ class SchoolSearchBar extends React.Component {
     }
     render() {
         return (<div id="School-Search-Container">
+			<ErrorDisplay />
             <Form onSubmit={this.handleSubmit.bind(this)}>
                 <FormGroup>
                     <Input type="text" autoComplete="off" name="school_name" id="school_name" onChange={this.onInputChange.bind(this)} onFocus={this.handleFocusEnter.bind(this)}  onBlur={this.handleFocusLeave.bind(this)}
@@ -60,4 +66,12 @@ class SchoolSearchBar extends React.Component {
     }
 }
 
-export default connect((state) => { return { searchResults: state.search.results } }, (dispatch) => bindActionCreators(actionCreators, dispatch))(SchoolSearchBar);
+export default connect((state)=>{
+    return { searchResults: state.search.results }
+}, (dispatch)=>{
+    return {
+        error:bindActionCreators(errorActionCreators, dispatch),
+        search:bindActionCreators(actionCreators,dispatch),
+        
+    }
+})(SchoolSearchBar)

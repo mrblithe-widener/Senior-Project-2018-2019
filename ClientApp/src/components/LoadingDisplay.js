@@ -9,7 +9,7 @@ class LoadingDisplay extends React.Component{
     render(){
         if(this.props.loading && this.props.loading.length > 0)
             return <div className="text-center">
-                <div class="spinner-border" role="status" style={{width:'10em', height:'10em'}}>
+                <div className="spinner-border" role="status" style={{width:'10em', height:'10em'}}>
                   <span className="sr-only">Loading...</span>
                 </div>
             </div>;

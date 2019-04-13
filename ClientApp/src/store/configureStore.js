@@ -6,6 +6,7 @@ import * as WeatherForecasts from './WeatherForecasts';
 import * as School from "./School";
 import * as Search from "./Search";
 import * as Loading from "./Loading";
+import * as Error from "./Error";
 
 export default function configureStore (history, initialState) {
   const reducers = {
@@ -13,7 +14,8 @@ export default function configureStore (history, initialState) {
       weatherForecasts: WeatherForecasts.reducer,
       school: School.reducer,
       search: Search.reducer,
-      loading: Loading.reducer
+      loading: Loading.reducer,
+	  error: Error.reducer
   };
 
   const middleware = [
