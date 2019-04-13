@@ -37,7 +37,6 @@ namespace SeniorProjectWebsite.Controllers
             {
                 return NotFound();
             }
-			throw new Exception("Test");
             return index;
         }
         [HttpGet("SearchZip/{zip}")]
@@ -46,7 +45,6 @@ namespace SeniorProjectWebsite.Controllers
             decimal zipcode;
             if (!decimal.TryParse(zip, out zipcode))
                 return BadRequest();
-			throw new Exception("Test");
             return await _context.Index.Where(x => x.Zip.HasValue && x.Zip.Value == zipcode).ToListAsync();
         }
         [HttpGet("SearchName/{name}")]
