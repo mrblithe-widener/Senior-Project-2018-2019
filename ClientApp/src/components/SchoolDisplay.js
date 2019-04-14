@@ -51,29 +51,47 @@ class SchoolDisplay extends React.Component{
             <LoadingDisplay />
             {this.props.Math_Scores?<h4>{this.props.Math_Scores.mathSchnam+", "+this.props.Math_Scores.mathLeanm}</h4>:null}
             {this.props.Geo?<h5>{this.props.Geo.street+", "+this.props.Geo.city+", "+this.props.Geo.state+", "+this.props.Geo.zip}</h5>:null}
-            <Table  borderless={true} style={{width:"55%"}}> 
-                {this.props.Math_Scores? readMathRender(this.props.Math_Scores, MathCols):null}
-                {this.props.Read_Scores? readMathRender(this.props.Read_Scores, ReadCols):null}
+            <Table  borderless={true} style={{width:"75%"}}> 
+				<tr>
+					{this.props.Math_Scores? readMathRender(this.props.Math_Scores, MathCols):null}
+					{this.props.Math_Scores && this.props.TeacherRatios? 
+						[<td data-toggle="tooltip" data-placement="bottom" title={MathCols[2].Column_Description}>
+							{MathCols[2].Column_Friendly_Name}
+						</td>,
+						<td>
+							{emptyFilter(MathCols[2].handler(this.props.Math_Scores['mathAllGradesNumvalid'], this.props.TeacherRatios.numFullTime))}
+						</td>]:null}</tr>
+						<tr>
+					{this.props.Read_Scores? readMathRender(this.props.Read_Scores, ReadCols):null}
+					{this.props.Read_Scores && this.props.TeacherRatios? 
+						[<td data-toggle="tooltip" data-placement="bottom" title={ReadCols[2].Column_Description}>
+							{ReadCols[2].Column_Friendly_Name}
+						</td>,
+						<td>
+							{emptyFilter(ReadCols[2].handler(this.props.Read_Scores['readAllGradesNumvalid'], this.props.TeacherRatios.numFullTime))}
+						</td>]:null}
+			</tr>
+
             </Table>
              </div>);
     }
 }
 
 function readMathRender(dataset, cols){
-    return (<tr>
+    return [
         <td data-toggle="tooltip" data-placement="bottom" title={cols[0].Column_Description}>
             {cols[0].Column_Friendly_Name}
-        </td>
+        </td>,
         <td>
             {emptyFilter(cols[0].handler(dataset, cols[0].Column_Name))}
-        </td> 
+        </td> ,
         <td data-toggle="tooltip" data-placement="bottom" title={cols[1].Column_Description}>
             {cols[1].Column_Friendly_Name}
-        </td>
+        </td>,
         <td>
             {emptyFilter(cols[1].handler(dataset, cols[1].Column_Name))}
         </td>
-    </tr>);
+		];
 }
 
 export default connect((state) => {return {
