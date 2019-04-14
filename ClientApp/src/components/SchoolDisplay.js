@@ -6,8 +6,9 @@ import SchoolSearchBar from "./SchoolSearchBar";
 import LoadingDisplay from "./LoadingDisplay";
 import ErrorDisplay from "./ErrorDisplay";
 import { errorActionCreators } from "../store/Error";
-import {MathCols, RenderRowContent, ReadCols, emptyFilter} from "../utils/ColumnRecord";
+import {MathCols, RenderRowContent, ReadCols, emptyFilter, GeoCols} from "../utils/ColumnRecord";
 import {Table} from "reactstrap";
+import ColDisplay from "./ColDisplay";
 
 class SchoolDisplay extends React.Component{
 
@@ -73,6 +74,7 @@ class SchoolDisplay extends React.Component{
 			</tr>
 
             </Table>
+			<ColDisplay dataset={this.props.Geo} Cols={GeoCols} show={true} Name="Geographical Information"/>
              </div>);
     }
 }
