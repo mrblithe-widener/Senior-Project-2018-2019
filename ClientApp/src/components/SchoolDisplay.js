@@ -18,6 +18,7 @@ class SchoolDisplay extends React.Component{
 
     componentWillUnmount(){
         this.props.error.clearError();
+		this.props.school.clearAll();
     }
     
 
