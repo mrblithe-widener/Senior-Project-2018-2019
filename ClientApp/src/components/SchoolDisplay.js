@@ -6,6 +6,9 @@ import SchoolSearchBar from "./SchoolSearchBar";
 import LoadingDisplay from "./LoadingDisplay";
 import ErrorDisplay from "./ErrorDisplay";
 import { errorActionCreators } from "../store/Error";
+import {MathCols, RenderRowContent, ReadCols, emptyFilter, GeoCols} from "../utils/ColumnRecord";
+import {Table} from "reactstrap";
+import ColDisplay from "./ColDisplay";
 
 class SchoolDisplay extends React.Component{
 
@@ -16,6 +19,7 @@ class SchoolDisplay extends React.Component{
 
     componentWillUnmount(){
         this.props.error.clearError();
+		this.props.school.clearAll();
     }
     
 
@@ -46,10 +50,50 @@ class SchoolDisplay extends React.Component{
         return (<div>
 			<ErrorDisplay />
             <LoadingDisplay />
-            {<h4>{this.props.Math_Scores ? this.props.Math_Scores.mathSchnam + ", " + this.props.Math_Scores.mathLeanm : null}</h4>}
-            {<h5>{this.props.Geo ? this.props.Geo.street + ", " + this.props.Geo.city + ", " + this.props.Geo.state + ", " + this.props.Geo.zip : null} </h5>
+            {this.props.Math_Scores?<h4>{this.props.Math_Scores.mathSchnam+", "+this.props.Math_Scores.mathLeanm}</h4>:null}
+            {this.props.Geo?<h5>{this.props.Geo.street+", "+this.props.Geo.city+", "+this.props.Geo.state+", "+this.props.Geo.zip}</h5>:null}
+            <Table  borderless={true} style={{width:"75%"}}> 
+				<tr>
+					{this.props.Math_Scores? readMathRender(this.props.Math_Scores, MathCols):null}
+					{this.props.Math_Scores && this.props.TeacherRatios? 
+						[<td data-toggle="tooltip" data-placement="bottom" title={MathCols[2].Column_Description}>
+							{MathCols[2].Column_Friendly_Name}
+						</td>,
+						<td>
+							{emptyFilter(MathCols[2].handler(this.props.Math_Scores['mathAllGradesNumvalid'], this.props.TeacherRatios.numFullTime))}
+						</td>]:null}</tr>
+						<tr>
+					{this.props.Read_Scores? readMathRender(this.props.Read_Scores, ReadCols):null}
+					{this.props.Read_Scores && this.props.TeacherRatios? 
+						[<td data-toggle="tooltip" data-placement="bottom" title={ReadCols[2].Column_Description}>
+							{ReadCols[2].Column_Friendly_Name}
+						</td>,
+						<td>
+							{emptyFilter(ReadCols[2].handler(this.props.Read_Scores['readAllGradesNumvalid'], this.props.TeacherRatios.numFullTime))}
+						</td>]:null}
+			</tr>
+
+            </Table>
+			<ColDisplay dataset={this.props.Geo} Cols={GeoCols} show={true} Name="Geographical Information"/>
              </div>);
     }
+}
+
+function readMathRender(dataset, cols){
+    return [
+        <td data-toggle="tooltip" data-placement="bottom" title={cols[0].Column_Description}>
+            {cols[0].Column_Friendly_Name}
+        </td>,
+        <td>
+            {emptyFilter(cols[0].handler(dataset, cols[0].Column_Name))}
+        </td> ,
+        <td data-toggle="tooltip" data-placement="bottom" title={cols[1].Column_Description}>
+            {cols[1].Column_Friendly_Name}
+        </td>,
+        <td>
+            {emptyFilter(cols[1].handler(dataset, cols[1].Column_Name))}
+        </td>
+		];
 }
 
 export default connect((state) => {return {

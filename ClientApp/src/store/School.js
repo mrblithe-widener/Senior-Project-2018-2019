@@ -10,6 +10,7 @@ const requestIncome = "REQUEST_INCOME";
 const requestIndex = "REQUEST_INDEX";
 const requestTeacherRatios = "REQUEST_TEACHER_RATIOS";
 const requestTitle1 = "REQUEST_TITLE1";
+const clearAll = "CLEAR_ALL";
 
 const initalState = 
     {Math_Scores:undefined, 
@@ -71,7 +72,9 @@ export const actionCreators = {
         const url = `api/Title1/${ncessch}`;
         const result = await processRequest(url,dispatch);
         dispatch({type:requestTitle1, Title1:result});
-    }
+    }, clearAll:()=> (dispatch, getState)=>{
+		dispatch({type:clearAll});
+	}
 }
 
 
@@ -99,6 +102,8 @@ export const reducer = (state, action)=>{
             return {...state, TeacherRatios:action.TeacherRatios};
         case requestTitle1:
             return {...state, Title1:action.Title1};
+		case clearAll:
+			return initalState;
         default:
             return state || initalState;
     }
