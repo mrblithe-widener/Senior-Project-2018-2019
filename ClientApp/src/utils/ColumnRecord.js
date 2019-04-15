@@ -82,3 +82,7 @@ export const GeoCols = [
 	new ColumnRecord("zip", "Zipcode", "Zip code the school is in"),
 	new ColumnRecord("locale", "Area Description", "Type of Area the school is located in", handleLocale),
 ];
+
+export const TeacherRatioCols = [
+    new ColumnRecord("numFullTime", "Number of Teachers", "the total full-time-equivalent classroom teachers")
+]

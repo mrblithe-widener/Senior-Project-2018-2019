@@ -6,7 +6,7 @@ import SchoolSearchBar from "./SchoolSearchBar";
 import LoadingDisplay from "./LoadingDisplay";
 import ErrorDisplay from "./ErrorDisplay";
 import { errorActionCreators } from "../store/Error";
-import {MathCols, RenderRowContent, ReadCols, emptyFilter, GeoCols} from "../utils/ColumnRecord";
+import { MathCols, RenderRowContent, ReadCols, emptyFilter, GeoCols, TeacherRatioCols } from "../utils/ColumnRecord";
 import {Table} from "reactstrap";
 import ColDisplay from "./ColDisplay";
 
@@ -71,7 +71,8 @@ class SchoolDisplay extends React.Component{
 						<td>
 							{emptyFilter(ReadCols[2].handler(this.props.Read_Scores['readAllGradesNumvalid'], this.props.TeacherRatios.numFullTime))}
 						</td>]:null}
-			</tr>
+                </tr>
+                {this.props.TeacherRatios ? RenderRowContent(TeacherRatioCols[0], this.props.TeacherRatios) : null}
 
             </Table>
 			<ColDisplay dataset={this.props.Geo} Cols={GeoCols} show={true} Name="Geographical Information"/>
