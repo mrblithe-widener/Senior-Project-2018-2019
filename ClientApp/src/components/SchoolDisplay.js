@@ -7,14 +7,17 @@ import LoadingDisplay from "./LoadingDisplay";
 import ErrorDisplay from "./ErrorDisplay";
 import { errorActionCreators } from "../store/Error";
 import { MathCols, RenderRowContent, ReadCols, emptyFilter, GeoCols, TeacherRatioCols } from "../utils/ColumnRecord";
-import {Table} from "reactstrap";
+import {Table, Input} from "reactstrap";
 import ColDisplay from "./ColDisplay";
 
 class SchoolDisplay extends React.Component{
 
     constructor(props){
         super(props);
-        this.state = {hasRequestedOthers:false};
+        this.state = { hasRequestedOthers: false, active: "" };
+        this.ColDisplays = [
+            new ColDisplayMetaData("Geo", "Geo", GeoCols, "Geographical Information"),
+        ];
     }
 
     componentWillUnmount(){
@@ -46,6 +49,24 @@ class SchoolDisplay extends React.Component{
         }
     }
 
+
+    renderDisplay() {
+        return <div> {this.ColDisplays.map(x => <ColDisplay key={x.name} show={this.state.active === x.name} Cols={x.Cols} dataset={this.props[x.dataset]} Name={x.FriendlyName} />)}</div>
+    }
+
+    handleColDisplayChange(e) {
+        const newVal = e.currentTarget.value;
+        this.setState({ active: newVal });
+    }   
+
+    renderColSelector() {
+        return (<div>
+            <Input type="select" onChange={this.handleColDisplayChange.bind(this)} value={this.state.active} >
+                <option value={""}> </option>
+                {this.ColDisplays.map(x => this.props[x.dataset] ? <option key={x.name} value={x.name}>{x.FriendlyName} </option> : null )}
+            </Input>
+        </div>);
+    }
     render(){
         return (<div>
 			<ErrorDisplay />
@@ -76,8 +97,18 @@ class SchoolDisplay extends React.Component{
                     {this.props.TeacherRatios ? RenderRowContent(TeacherRatioCols[0], this.props.TeacherRatios) : null}
                 </tbody>
             </Table>
-			<ColDisplay dataset={this.props.Geo} Cols={GeoCols} show={true} Name="Geographical Information"/>
+            {this.renderColSelector()}
+            {this.renderDisplay()}
              </div>);
+    }
+}
+
+class ColDisplayMetaData{
+    constructor(name, dataset, Cols, FriendlyName){
+        this.name = name;
+        this.dataset = dataset;
+        this.Cols = Cols;
+        this.FriendlyName = FriendlyName;
     }
 }
 
