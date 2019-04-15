@@ -18,15 +18,15 @@ class ColumnRecord{
     }
 }
 
-export function RenderRowContent(record, dataset){
-    return (<tr>
-                    <td data-toggle="tooltip" data-placement="bottom" title={record.Column_Description}>
-                        {record.Column_Friendly_Name}
-                    </td>
-                    <td>
-                        {emptyFilter(record.handler(dataset, record.Column_Name))}
-                    </td>
-                </tr>);
+export function RenderRowContent(record, dataset) {
+    return (<tr key={record.Column_Name} >
+                <td key={record.Column_Name + "label"} data-toggle="tooltip" data-placement="bottom" title={record.Column_Description}>
+                    {record.Column_Friendly_Name}
+                </td>
+                <td key={record.Column_Name + "value"} >
+                    {emptyFilter(record.handler(dataset, record.Column_Name))}
+                </td>
+            </tr>);
 }
 
 export const MathCols = [

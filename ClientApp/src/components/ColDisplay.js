@@ -8,10 +8,12 @@ export default class ColDisplay extends React.Component{
 			return (
 				<Jumbotron>
 					<h5> {this.props.Name} </h5>
-					<Table>
-						{this.props.Cols.map(x=>
-							RenderRowContent(x, this.props.dataset))
-						}
+                    <Table>
+                        <tbody>
+						    {this.props.Cols.map(x=>
+							    RenderRowContent(x, this.props.dataset))
+                                }
+                        </tbody>
 					</Table>
 				</Jumbotron>)
 		else
