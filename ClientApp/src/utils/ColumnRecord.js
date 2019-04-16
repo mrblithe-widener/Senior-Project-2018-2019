@@ -1,14 +1,29 @@
 import * as React from 'react';
+/**
+ * a Function which provides a default handler for a column record
+ * This function will retireve the column from the given dataset
+ */
 function defaultHandler(dataset, Column_Name){
     return dataset[Column_Name];
 }
 
+/**
+ * This function will prepare the given text for display
+ * It will replace any non number which is falsy or whitespace with 'Not Available'
+ */
 export function emptyFilter(text){
     if(! (typeof text ==='number') && (! text || text.match(/^\s+$/)))
         return "Not Available";
     return text;
 }
 
+/**
+ * This class contains the data needed to show the user the data from the particular dataset
+ * The column_name is the actual column name in the json from the api
+ * the column_friendly_name is the column name that the user will see next ot the data
+ * The column_Description is the tool tip that will appear when the friendly name is hovered over
+ * The handler processes the raw input into a viewable form and defaults to the defaultHandler
+ */
 class ColumnRecord{
     constructor(Column_Name, Column_Friendly_Name, Column_Description, handler=defaultHandler){
         this.Column_Name = Column_Name;
@@ -17,6 +32,13 @@ class ColumnRecord{
         this.handler = handler;
     }
 }
+
+/**
+ * This function renders the content of a column record for viewing
+ * it converts this information for that particular record into the form the user will see
+ * @param {*} record  the record to parse (the meta data to tell the row what to show)
+ * @param {*} dataset  the dataset to pull the data from
+ */
 
 export function RenderRowContent(record, dataset) {
     return (<tr key={record.Column_Name} >
@@ -40,6 +62,12 @@ export const ReadCols = [
     new ColumnRecord("read_pct_prof", "Reading: Percentage Proficient", "Percentage of students in the school that scored at or above proficient", (dataset,_)=>dataset['readAllGradesPctprofLow']>0?((dataset['readAllGradesPctprofLow']+dataset['readAllGradesPctprofHigh'])/2)+'%':""),
 	new ColumnRecord("read_full_time", "Reading: Student to Teacher Ratio", "The number of students, who were tested, divided by the total full-time-equivalent classroom teachers", (num_students, num_teach)=>num_students> 0 && num_teach > 0? (num_students/num_teach).toFixed(2):"Not Available")
 ]
+
+/**
+ *  this function converts the locale to a readable form based off the documentation
+ * @param {The dataset to pull the from} dataset 
+ * @param {This is meaningless in this context and is ignored} Column_Name 
+ */
 
 function handleLocale(dataset,Column_Name){
 	switch(dataset['locale']){

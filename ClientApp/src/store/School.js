@@ -1,6 +1,7 @@
 import {makeApiCall} from "../utils/ApiHelper"
 import { startLoading, stopLoading } from "./Loading";
 import {createError} from "./Error";
+//The actions that will request the data from the various data sources
 const requestMath = "REQUEST_MATH";
 const requestRead = "REQUEST_READ";
 const requestBusiness = "REQUEST_BUSINESS";
@@ -12,6 +13,7 @@ const requestTeacherRatios = "REQUEST_TEACHER_RATIOS";
 const requestTitle1 = "REQUEST_TITLE1";
 const clearAll = "CLEAR_ALL";
 
+//The intial state of the store with no data loaded
 const initalState = 
     {Math_Scores:undefined, 
         Read_Scores:undefined,
@@ -23,6 +25,13 @@ const initalState =
         TeacherRatios:undefined,
         Title1:undefined
     };
+/**
+ * A generic handelr which will request the given url and return the result
+ * In addition, it will handle all loading and error related tasks while the 
+ * request executes
+ * @param {the url to make the request to } url 
+ * @param {the dispatch function which sends the request to the reducers} dispatch 
+ */
 async function processRequest(url, dispatch){
 		dispatch({type:startLoading});
 		try{
@@ -35,6 +44,10 @@ async function processRequest(url, dispatch){
 		}
 }
 
+/**
+ * The action createors which make the request for the various dataset apis
+ * These functions make the request and dispatch an action to add the resulting data to the store
+ */
 export const actionCreators = {
     requestMath:ncessch => async (dispatch, getState)=>{
         const url = `api/Math/${ncessch}`;

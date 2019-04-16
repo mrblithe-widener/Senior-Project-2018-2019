@@ -6,6 +6,9 @@ import * as Search from "./Search";
 import * as Loading from "./Loading";
 import * as Error from "./Error";
 
+//Much of this code is automatically generated at the begining of a project
+//It sets up the global reducer store lookup and adds in the thunk middleware (which is used for async actions)
+//Also configures debugging tools
 export default function configureStore (history, initialState) {
   const reducers = {
       school: School.reducer,
