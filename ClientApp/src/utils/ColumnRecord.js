@@ -169,3 +169,41 @@ export const BusinessCols = [
 export const TeacherRatioCols = [
     new ColumnRecord("numFullTime", "Number of Teachers", "the total full-time-equivalent classroom teachers")
 ]
+
+export const IncomeCols = [
+	new ColumnRecord("beforeCreditsAmount", "Before Credits Amount", "Income tax bofore credits amount"),
+	new ColumnRecord("excessIncomeCreditAmount","Excess Income Credit Amount", "Excess advance premium tax credit repayment amount"),
+	new ColumnRecord("numOfHeadHouseReturns", "Number of Head House Returns", "Total number of head house returns filed"),
+	new ColumnRecord("unemployeementAmount","Unemployement Amount", "Total amount for unemployed tax returns"),
+	new ColumnRecord("numReturnsUnemployeement", "Total Returns from Unemployed People","Total tax returns recieved from unemployed people"),
+	new ColumnRecord("businessProfessionalAmount","Business Professional Amount", "Business or professional net income (less loss) amount"),
+	new ColumnRecord("stateLocalGeneralAmount", "State and Local General Sales Tax Amount","Total state and local general sales tax amount"),
+	new ColumnRecord("stateLocalAmount", "State and Local Refund Amount", "State and local income tax refunds amount"),
+	new ColumnRecord("netPremiumCreditsAmount", "Net Premium Credits", "Total net credit amounts"),
+	new ColumnRecord("numJointReturns", "Number of Joint Returns", "Total number of joint returns filed"),
+	new ColumnRecord("personalPropertyAmounts", "Personal Property Amounts", "Total number of property amounts"),
+	new ColumnRecord("numberReturnsPersonalProperty", "Number of Property Taxes", "Number of property taxes files"),
+	new ColumnRecord("numReturnsExcessIncomeCredit", "Number of returns with excess earned income credit", "Total number of returns with excess earned income credit"),
+	new ColumnRecord("numReturnStateLocalGeneral", "Number of returns with state and local income tax refunds", "Total number of returns with state and local income tax refunds"),
+	new ColumnRecord("numStateLocal", "Number of returns with State and local general sales tax", "Total number of returns with State and local general sales tax"),
+	new ColumnRecord("numberReturnsNetPremiumCredits", "Number of returns with net premium tax credit", "Total number of returns with net premium tax credit"),
+	new ColumnRecord("numDep", "Number of dependents", "Number of dependents"),
+	new ColumnRecord("taxableAmount", "Taxable Income", "Taxable Income"),
+	new ColumnRecord("educationExpenseAmount", "Educator expenses amount", "Total Educator expenses amount"),
+	new ColumnRecord("numBusinessProfessional","Number of Business Professionals", "Number of returns with business or professional net income (less loss)" ),
+	new ColumnRecord("numSingleReturns", "Number of Single Returns", "Total number of single taxes filed"),
+	new ColumnRecord("refundableEduAmount", "Refundable education credit amount", "Total Refundable education credit amount"),
+	new ColumnRecord("nonRefundEduAmount", "Nonrefundable education credit amount", "Total nonrefundable education credit amount"),
+	new ColumnRecord("numberOfRefundableEdu", "Number of returns with refundable education credit", "Total number of returns with refundable education credit"),
+	new ColumnRecord("numReturnsNonRefundEdu", "Number of returns with nonrefundable education credit", "Total number of returns with nonrefundable education credit"),
+	new ColumnRecord("toalIncomeAmount", "Total Income", "Total Income"),
+	new ColumnRecord("agi", "Adjusted gross income", "Adjusted gross income"),
+	new ColumnRecord("numExemptions", "Number of Exemptions", "Total number of exemptions"),
+	new ColumnRecord("numReturnsSalaryWages", "Number of Salary and Wages Returns", "Total number of salary and wages returns"),
+	new ColumnRecord("numberReturnsTaxable", "Total number of Taxable Returns", "Total number of returns that are taxable"),
+	new ColumnRecord("numReturnsBeforeCredits", "Number of Returns before Credits", "Total number of returns filed before credits"),
+	new ColumnRecord("numReturnTotalIncome", "Number of Income Returns", "Total number of income taxes files"),
+	new ColumnRecord("numReturns", "Total number of returns", "Total number of tax returns recieved")
+
+
+];
