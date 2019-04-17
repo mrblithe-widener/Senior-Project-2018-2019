@@ -6,7 +6,8 @@ import SchoolSearchBar from "./SchoolSearchBar";
 import LoadingDisplay from "./LoadingDisplay";
 import ErrorDisplay from "./ErrorDisplay";
 import { errorActionCreators } from "../store/Error";
-import { MathCols, RenderRowContent, ReadCols, emptyFilter, GeoCols, TeacherRatioCols } from "../utils/ColumnRecord";
+import { MathCols, RenderRowContent, ReadCols, emptyFilter, GeoCols, TeacherRatioCols,
+Title1Cols, BusinessCols } from "../utils/ColumnRecord";
 import {Table, Input} from "reactstrap";
 import ColDisplay from "./ColDisplay";
 
@@ -17,6 +18,8 @@ class SchoolDisplay extends React.Component{
         this.state = { hasRequestedOthers: false, active: "" };
         this.ColDisplays = [
             new ColDisplayMetaData("Geo", "Geo", GeoCols, "Geographical Information"),
+            new ColDisplayMetaData("Title1","Title1", Title1Cols, "Title 1"),
+            new ColDisplayMetaData("Local Business Information", "Business", BusinessCols,"Local Business Information")
         ];
     }
 

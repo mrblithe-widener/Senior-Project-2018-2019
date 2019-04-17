@@ -110,6 +110,61 @@ export const GeoCols = [
 	new ColumnRecord("zip", "Zipcode", "Zip code the school is in"),
 	new ColumnRecord("locale", "Area Description", "Type of Area the school is located in", handleLocale),
 ];
+function title1Handler(dataset, column){
+	if(dataset[column] !== -9)
+		return dataset[column]
+	return "";//Will be replaced with not available
+}
+export const Title1Cols = [
+	new ColumnRecord("schoolWideTitleIEligibility", "School Wide Title 1 Eligibility", "Does the school qualify for Title 1", title1Handler),
+	new ColumnRecord("ntnlSchoolLunchProgramStatus", "School Lunch Program Status","Does the school qualify for school lunch program", title1Handler),
+	new ColumnRecord("titleIStatusDescription", "Title 1 Status", "Does School qualify for Title 1 funding?",title1Handler),
+	new ColumnRecord("titleIEligibility","Title 1 Eligibility", "Is the school eligible for Title 1",title1Handler),
+];
+
+/**
+ * Handles special cases for business data.
+ * Info based off docs for dataset 
+ * @param {the business dataset} dataset 
+ * @param {The column for processing} column 
+ */
+function businessHandler(dataset, column){
+	switch(dataset[column]){
+		case 'D':
+			return null;
+		case "b":
+			return "20 to 99 employees";
+		case "a":
+			return "0 to 19 employees";
+		case "h":
+			return "2,500 to 4,999 employees";
+		case "c":
+			return "100 to 249 employees";
+		case "i":
+			return "5,000 to 9,999 employees";
+		case "f":
+			return "500 to 999 employees";
+		case "e":
+			return "250 to 499 employees";
+		case "g":
+			return "1,000 to 2,499 employees";
+		case "j":
+			return "10,000 to 24,999 employees";
+		case "k":
+			return "25,000 to 49,999 employees";
+		case "l":
+			return "50,000 to 99,999 employees";
+		default:
+			return dataset[column]
+	}
+}
+
+export const BusinessCols = [
+	new ColumnRecord("numEstablishments","Number Of Establishments", "Total number of businesses in same zip code as the school" ),
+	new ColumnRecord("numPaidEmployees", "Number of Paid Employees in Surrounding Zip Code", "Total number of paid employees", businessHandler),
+	new ColumnRecord("firstQuarterPayroll", "First Quarter Payroll","First quarter payroll of the businesses in the surrounding zip code", businessHandler),
+	new ColumnRecord("annualPayroll", "Annual Payroll", "Annual payroll of the businesses in the surrounding zip code", businessHandler)
+];
 
 export const TeacherRatioCols = [
     new ColumnRecord("numFullTime", "Number of Teachers", "the total full-time-equivalent classroom teachers")
