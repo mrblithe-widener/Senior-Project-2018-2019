@@ -1,4 +1,4 @@
-import {makeApiCall} from "../utils/ApiHelper"
+import {makeApiCall, NOT_FOUND} from "../utils/ApiHelper"
 import { startLoading, stopLoading } from "./Loading";
 import {createError} from "./Error";
 //The actions that will request the data from the various data sources
@@ -39,7 +39,8 @@ async function processRequest(url, dispatch){
         	dispatch({type:stopLoading});
 			return result;
 		}catch(e){
-			dispatch({type:createError, errorMessage:e.message});
+            if(e.message !== NOT_FOUND)
+                dispatch({type:createError, errorMessage:e.message});
         	dispatch({type:stopLoading});
 		}
 }

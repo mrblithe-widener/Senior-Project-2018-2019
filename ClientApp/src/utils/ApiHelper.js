@@ -19,6 +19,6 @@ export async function makeApiCall(url) {
         } else
             return await response.json();
     } catch (e) {
-        throw new Error(e);
+        throw e;
     }
 }
