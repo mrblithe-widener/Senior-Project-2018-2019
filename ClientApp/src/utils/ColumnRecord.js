@@ -14,6 +14,8 @@ function defaultHandler(dataset, Column_Name){
 export function emptyFilter(text){
     if(! (typeof text ==='number') && (! text || text.match(/^\s+$/)))
         return "Not Available";
+    if(typeof text === 'number')
+        return text.toLocaleString();
     return text;
 }
 
@@ -46,7 +48,9 @@ export function RenderRowContent(record, dataset) {
                     {record.Column_Friendly_Name}
                 </td>
                 <td key={record.Column_Name + "value"} >
-                    {emptyFilter(record.handler(dataset, record.Column_Name))}
+					{record.Column_Name.includes("zip")? 
+					!record.handler(dataset,record.Column_Name)?null:record.handler(dataset,record.Column_Name) 
+					:emptyFilter(record.handler(dataset, record.Column_Name))}
                 </td>
             </tr>);
 }
@@ -155,7 +159,10 @@ function businessHandler(dataset, column){
 		case "l":
 			return "50,000 to 99,999 employees";
 		default:
-			return dataset[column]
+			if(dataset[column] && !isNaN(dataset[column]))//isNan checks if the string is numeric
+				return (+dataset[column]).toLocaleString()// The plus here is converting the value to a number
+			else
+				return dataset[column]
 	}
 }
 
