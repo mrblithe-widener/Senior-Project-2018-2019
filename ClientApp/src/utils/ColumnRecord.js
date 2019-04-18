@@ -11,7 +11,9 @@ function defaultHandler(dataset, Column_Name){
  * This function will prepare the given text for display
  * It will replace any non number which is falsy or whitespace with 'Not Available'
  */
-export function emptyFilter(text){
+export function emptyFilter(text, colName = null){
+	if(colName && colName.toLowerCase().includes("zip") && text)
+		return text;
     if(! (typeof text ==='number') && (! text || text.match(/^\s+$/)))
         return "Not Available";
     if(typeof text === 'number')
@@ -43,14 +45,13 @@ class ColumnRecord{
  */
 
 export function RenderRowContent(record, dataset) {
+	console.log(record.Column_Name)
     return (<tr key={record.Column_Name} >
                 <td key={record.Column_Name + "label"} data-toggle="tooltip" data-placement="bottom" title={record.Column_Description}>
                     {record.Column_Friendly_Name}
                 </td>
                 <td key={record.Column_Name + "value"} >
-					{record.Column_Name.includes("zip")? 
-					!record.handler(dataset,record.Column_Name)?null:record.handler(dataset,record.Column_Name) 
-					:emptyFilter(record.handler(dataset, record.Column_Name))}
+					{emptyFilter(record.handler(dataset, record.Column_Name), record.Column_Name)}
                 </td>
             </tr>);
 }
@@ -168,9 +169,9 @@ function businessHandler(dataset, column){
 
 export const BusinessCols = [
 	new ColumnRecord("numEstablishments","Number Of Establishments", "Total number of businesses in same zip code as the school" ),
-	new ColumnRecord("numPaidEmployees", "Number of Paid Employees in Surrounding Zip Code", "Total number of paid employees", businessHandler),
-	new ColumnRecord("firstQuarterPayroll", "First Quarter Payroll","First quarter payroll of the businesses in the surrounding zip code", businessHandler),
-	new ColumnRecord("annualPayroll", "Annual Payroll", "Annual payroll of the businesses in the surrounding zip code", businessHandler)
+	new ColumnRecord("numPaidEmployees", "Number of Paid Employees in Surrounding Zip Code", "Total number of paid employees",businessHandler),
+	new ColumnRecord("firstQuarterPayroll", "First Quarter Payroll","First quarter payroll of the businesses in the surrounding zip code",(dataset,column)=> `$ ${emptyFilter(businessHandler(dataset, column))}`),
+	new ColumnRecord("annualPayroll", "Annual Payroll", "Annual payroll of the businesses in the surrounding zip code", (dataset,column)=> `$ ${emptyFilter(businessHandler(dataset, column))}`)
 ];
 
 export const TeacherRatioCols = [
@@ -178,34 +179,34 @@ export const TeacherRatioCols = [
 ]
 
 export const IncomeCols = [
-	new ColumnRecord("beforeCreditsAmount", "Before Credits Amount", "Income tax bofore credits amount"),
-	new ColumnRecord("excessIncomeCreditAmount","Excess Income Credit Amount", "Excess advance premium tax credit repayment amount"),
+	new ColumnRecord("beforeCreditsAmount", "Before Credits Amount", "Income tax bofore credits amount",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("excessIncomeCreditAmount","Excess Income Credit Amount", "Excess advance premium tax credit repayment amount",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
 	new ColumnRecord("numOfHeadHouseReturns", "Number of Head House Returns", "Total number of head house returns filed"),
-	new ColumnRecord("unemployeementAmount","Unemployement Amount", "Total amount for unemployed tax returns"),
+	new ColumnRecord("unemployeementAmount","Unemployement Amount", "Total amount for unemployed tax returns",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
 	new ColumnRecord("numReturnsUnemployeement", "Total Returns from Unemployed People","Total tax returns recieved from unemployed people"),
-	new ColumnRecord("businessProfessionalAmount","Business Professional Amount", "Business or professional net income (less loss) amount"),
-	new ColumnRecord("stateLocalGeneralAmount", "State and Local General Sales Tax Amount","Total state and local general sales tax amount"),
-	new ColumnRecord("stateLocalAmount", "State and Local Refund Amount", "State and local income tax refunds amount"),
-	new ColumnRecord("netPremiumCreditsAmount", "Net Premium Credits", "Total net credit amounts"),
+	new ColumnRecord("businessProfessionalAmount","Business Professional Amount", "Business or professional net income (less loss) amount",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("stateLocalGeneralAmount", "State and Local General Sales Tax Amount","Total state and local general sales tax amount",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("stateLocalAmount", "State and Local Refund Amount", "State and local income tax refunds amount",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("netPremiumCreditsAmount", "Net Premium Credits", "Total net credit amounts",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
 	new ColumnRecord("numJointReturns", "Number of Joint Returns", "Total number of joint returns filed"),
-	new ColumnRecord("personalPropertyAmounts", "Personal Property Amounts", "Total number of property amounts"),
+	new ColumnRecord("personalPropertyAmounts", "Personal Property Amounts", "Total number of property amounts",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
 	new ColumnRecord("numberReturnsPersonalProperty", "Number of Property Taxes", "Number of property taxes files"),
 	new ColumnRecord("numReturnsExcessIncomeCredit", "Number of returns with excess earned income credit", "Total number of returns with excess earned income credit"),
 	new ColumnRecord("numReturnStateLocalGeneral", "Number of returns with state and local income tax refunds", "Total number of returns with state and local income tax refunds"),
 	new ColumnRecord("numStateLocal", "Number of returns with State and local general sales tax", "Total number of returns with State and local general sales tax"),
 	new ColumnRecord("numberReturnsNetPremiumCredits", "Number of returns with net premium tax credit", "Total number of returns with net premium tax credit"),
 	new ColumnRecord("numDep", "Number of dependents", "Number of dependents"),
-	new ColumnRecord("taxableAmount", "Taxable Income", "Taxable Income"),
-	new ColumnRecord("educationExpenseAmount", "Educator expenses amount", "Total Educator expenses amount"),
+	new ColumnRecord("taxableAmount", "Taxable Income", "Taxable Income",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("educationExpenseAmount", "Educator expenses amount", "Total Educator expenses amount",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
 	new ColumnRecord("numBusinessProfessional","Number of Business Professionals", "Number of returns with business or professional net income (less loss)" ),
 	new ColumnRecord("numSingleReturns", "Number of Single Returns", "Total number of single taxes filed"),
-	new ColumnRecord("refundableEduAmount", "Refundable education credit amount", "Total Refundable education credit amount"),
-	new ColumnRecord("nonRefundEduAmount", "Nonrefundable education credit amount", "Total nonrefundable education credit amount"),
-	new ColumnRecord("numberOfRefundableEdu", "Number of returns with refundable education credit", "Total number of returns with refundable education credit"),
-	new ColumnRecord("numReturnsNonRefundEdu", "Number of returns with nonrefundable education credit", "Total number of returns with nonrefundable education credit"),
-	new ColumnRecord("sallariesWagesAmount", "Salaries and wages amount", "Total amount of salaray and wage taxes"),
-	new ColumnRecord("toalIncomeAmount", "Total Income", "Total Income"),
-	new ColumnRecord("agi", "Adjusted gross income", "Adjusted gross income"),
+	new ColumnRecord("refundableEduAmount", "Refundable education credit amount", "Total Refundable education credit amount",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("nonRefundEduAmount", "Nonrefundable education credit amount", "Total nonrefundable education credit amount",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("numberOfRefundableEdu", "Number of returns with refundable education credit", "Total number of returns with refundable education credit",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("numReturnsNonRefundEdu", "Number of returns with nonrefundable education credit", "Total number of returns with nonrefundable education credit",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("sallariesWagesAmount", "Salaries and wages amount", "Total amount of salaray and wage taxes",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("toalIncomeAmount", "Total Income", "Total Income",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("agi", "Adjusted gross income", "Adjusted gross income",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
 	new ColumnRecord("numExemptions", "Number of Exemptions", "Total number of exemptions"),
 	new ColumnRecord("numReturnsSalaryWages", "Number of Salary and Wages Returns", "Total number of salary and wages returns"),
 	new ColumnRecord("numberReturnsTaxable", "Total number of Taxable Returns", "Total number of returns that are taxable"),
@@ -215,63 +216,63 @@ export const IncomeCols = [
 ];
 
 export const FundingCols = [
-	new ColumnRecord("pctTitle1", "Percentage of Funding from Title 1", "Percentage of total funding that comes from Title 1"),
-	new ColumnRecord("pctCharges", "Percent of revenue from charges", "Percentage of revenue from charges (such as school lunch)"),
-	new ColumnRecord("strTrans", "Income from State Transportation Programs", "Total income from transportation programs from state"),
-	new ColumnRecord("pctTotFed", "Percentage of Funding from Federal Sources", "Percent of total funding that comes from state sources"),
-	new ColumnRecord("pctParentGovCont", "Parent government contributions", "Percentage of total funding from  Parent government contributions"),
-	new ColumnRecord("pctRevLocale", "Percentage of Revenue From Local", "Percentage of total revenue generated from local sources"),
-	new ColumnRecord("pctsGenForm", "Percentage of funding from General Assistance", "Percentage of total funding that comes from general assistance formula"),
-	new ColumnRecord("locrCharges", "Revenue from local charges", "Revenue from charges to local government for goods and services (such as school lunch)"),
-	new ColumnRecord("perPupilTotSuppServ", "Per Pupil Support Services", "Total Current Spending for Support Services Per Pupil"),
-	new ColumnRecord("perPupilSupportStaff", "Per Pupil Support Staff", "Amount Spent Per Pulil on Support Staff"),
-	new ColumnRecord("perPupilSchoolAdmin", "Per Pupil School Administration", "Amount Spent Per Pupil on School Adminisration"),
-	new ColumnRecord("perPupilGenAdmin", "Per Pupil General Administration","Amount Spent Per Pupil on General Adminisration"),
-	new ColumnRecord("strSpecEd", "Federal Income for Special Education", "Amount Recieved for Special Education from federal government"),
-	new ColumnRecord("perPupilInstBene", "Per pupil institutional benefits", "Amount per pupil the institution spends on beneftis"),
-	new ColumnRecord("tlocrev", "Total Local Revenue", "Revenue generated from Local sources"),
-	new ColumnRecord("perPupilInstSupportStaff", "Per pupil spend on support staff", "Amount of money spent on support staff by the institution per pupil"),
-	new ColumnRecord("perPupilInstSalWag", "Amount per pupil spent on wages", "Amount per pupil spent on salary and wages"),
-	new ColumnRecord("tPayGovt", "Total Payments to other governments", "Total amount payed to other governments"),
-	new ColumnRecord("locrTax", "Income from local taxes", "Total income form local taxes"),
-	new ColumnRecord("locrCitiesCounties", "Revenue from cities and counties", "Total revenue from cities and counties"),
-	new ColumnRecord("locrOthr", "Other local revenues", "Total revenue from other local sources"),
-	new ColumnRecord("fedTitle1", "Title 1 Recieved", "Federal Revenue from Title 1"),
-	new ColumnRecord("perPupilEmployeeBen", "Employee Benefits Per Pupil", "How much benefits employees recieve per pupil"),
-	new ColumnRecord("pctOtherLocalGov", "Percentage of Local Funding (Other)", "Percentage of funding recieved from other local sources"),
-	new ColumnRecord("longDebtRetired", "Long-term debt retired during the fiscal year", "Total Amount of long-term debt retired during the fiscal year"),
-	new ColumnRecord("perPupilInstTot", "Total Spending for Instruction", "How much the school spends for instruction"),
-	new ColumnRecord("locrOtherSchools", "Revenue from other local school systems", "Total revenue from other local school systems"),
-	new ColumnRecord("strOthr", "Income from other state sources", "Total amount of revenue from other state sources"),
-	new ColumnRecord("tCursGenAdmin", "Total Spening on General Admission", "Total schools spend on General Admission"),
-	new ColumnRecord("perPupilSalaryWages", "Teacher Wages Per Pupil", "Total wages for teachers per pupil"),
-	new ColumnRecord("pctTotState", "Percentage of Funding from State", "Percentage of funding recieved from the state"),
-	new ColumnRecord("tCapital", "Total Capital Outlay Expenditure", "Total amount spent on replacement or repair of items"),
-	new ColumnRecord("fedrOthr", "Federal Funding (Other)", "Funding recieved from other federal sources"),
-	new ColumnRecord("tIntrst", "Interest on School System Indebtedness", "Payment towards interest on school system indebtedness"),
-	new ColumnRecord("locrPropTax", "Income from local property taxes", "Total income from local property taxes"),
-	new ColumnRecord("perPupilTotSpending", "Spending Per Pupil", "How much the school spends per pupil"),
-	new ColumnRecord("fedrNutr", "Federal child nutrition programs", "Total income from federal child nutrition programs"),
-	new ColumnRecord("outstandingDebt", "Outstanding Debt", "Total Outstanding Debt"),
-	new ColumnRecord("fedDis", "Total revenue for children with disabilities", "Total revenue from federal government for children with disabilties"),
-	new ColumnRecord("strGenFormulaAss", "Total  income from state general formula assistance", "Total income from state general formula assistance (Includes school lunch program, title 1, etc.)"),
-	new ColumnRecord("tCursStaffSupport", "Current spending on staff support", "Total Current Spending for Support Services - Instructional staff support"),
-	new ColumnRecord("tCursPupil", "Total Current Spending Per Pupil", "The amount of money currently spent per pupil"),
-	new ColumnRecord("tfedrev", "Total Revenue from Federal Goverment", "The amount of money recieved from the federal government "),
-	new ColumnRecord("tCurOther", "Total Spending (Other)", "Total spending to other and nonspecified "),
-	new ColumnRecord("longDebtIssued","Long-term debt issued during the fiscal year", "Amount of long-term debt issued during the fiscal year"),
-	new ColumnRecord("tstrev", "Total Revenue from State", "Total revenue recieved from the state"),
-	new ColumnRecord("tCursSchAdmin", "Total current spending on school administration", "Amount currently spent on school adminisration"),
-	new ColumnRecord("locrParGovCont", "Local Parent Government Contrabutions", "Revenue from local parent government contributions"),
-	new ColumnRecord("tCursOth", "Total Current Spending (Other)", "Total current spending to other sources"),
-	new ColumnRecord("tCurInstructionBene", "Total current spending on Employee benefits for instruction", "Total amount current spending on Employee benefits for instruction"),
-	new ColumnRecord("tEmployeeBen", "Total Employee Benefits", "Total amount spent on employee benefits"),
-	new ColumnRecord("tCurInstructionSalWag", "Total Spending on Wages", "Total spending on salary and wages to teachers"),
-	new ColumnRecord("tCurSupportServices","Total current spending on support services", "Total amount spent on support services"),
-	new ColumnRecord("tCurInstruction", "Total spending on instruction", "Total amount of spending on instruction"),
-	new ColumnRecord("totalExpenditure", "Total Expenditure", "Total Expenditure a school has"),
-	new ColumnRecord("tSalWage", "Total spending on wages and salary", "Overall spending on wages and salary"),
-	new ColumnRecord("totalrev", "Total Revenue", "Total Revenue the school recieve"),
-	new ColumnRecord("tCurrSpnd", "Total Current Spending", "How much the school currently spends"),
-	new ColumnRecord("pctTotalRev", "Percentage of Total Revenue Spent", "Percentage of total revenue the school is spending")
+	new ColumnRecord("pctTitle1", "Percentage of Funding from Title 1", "Percentage of total funding that comes from Title 1",(dataset,col)=> `${emptyFilter(defaultHandler(dataset,col))} %`),
+	new ColumnRecord("pctCharges", "Percent of revenue from charges", "Percentage of revenue from charges (such as school lunch)",(dataset,col)=> `${emptyFilter(defaultHandler(dataset,col))} %`),
+	new ColumnRecord("strTrans", "Income from State Transportation Programs", "Total income from transportation programs from state",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("pctTotFed", "Percentage of Funding from Federal Sources", "Percent of total funding that comes from state sources",(dataset,col)=> `${emptyFilter(defaultHandler(dataset,col))} %`),
+	new ColumnRecord("pctParentGovCont", "Parent government contributions", "Percentage of total funding from  Parent government contributions",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("pctRevLocale", "Percentage of Revenue From Local", "Percentage of total revenue generated from local sources",(dataset,col)=> `${emptyFilter(defaultHandler(dataset,col))} %`),
+	new ColumnRecord("pctsGenForm", "Percentage of funding from General Assistance", "Percentage of total funding that comes from general assistance formula",(dataset,col)=> `${emptyFilter(defaultHandler(dataset,col))} %`),
+	new ColumnRecord("locrCharges", "Revenue from local charges", "Revenue from charges to local government for goods and services (such as school lunch)",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("perPupilTotSuppServ", "Per Pupil Support Services", "Total Current Spending for Support Services Per Pupil",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("perPupilSupportStaff", "Per Pupil Support Staff", "Amount Spent Per Pupil on Support Staff",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("perPupilSchoolAdmin", "Per Pupil School Administration", "Amount Spent Per Pupil on School Adminisration",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("perPupilGenAdmin", "Per Pupil General Administration","Amount Spent Per Pupil on General Adminisration",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("strSpecEd", "Federal Income for Special Education", "Amount Recieved for Special Education from federal government",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("perPupilInstBene", "Per pupil institutional benefits", "Amount per pupil the institution spends on benefits",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("tlocrev", "Total Local Revenue", "Revenue generated from Local sources",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("perPupilInstSupportStaff", "Per pupil spend on support staff", "Amount of money spent on support staff by the institution per pupil",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("perPupilInstSalWag", "Amount per pupil spent on wages", "Amount per pupil spent on salary and wages",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("tPayGovt", "Total Payments to other governments", "Total amount payed to other governments",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("locrTax", "Income from local taxes", "Total income form local taxes",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("locrCitiesCounties", "Revenue from cities and counties", "Total revenue from cities and counties",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("locrOthr", "Other local revenues", "Total revenue from other local sources",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("fedTitle1", "Title 1 Recieved", "Federal Revenue from Title 1",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("perPupilEmployeeBen", "Employee Benefits Per Pupil", "How much benefits employees recieve per pupil",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("pctOtherLocalGov", "Percentage of Local Funding (Other)", "Percentage of funding recieved from other local sources",(dataset,col)=> `${emptyFilter(defaultHandler(dataset,col))} %`),
+	new ColumnRecord("longDebtRetired", "Long-term debt retired during the fiscal year", "Total Amount of long-term debt retired during the fiscal year",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("perPupilInstTot", "Total Spending for Instruction", "How much the school spends for instruction",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("locrOtherSchools", "Revenue from other local school systems", "Total revenue from other local school systems",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("strOthr", "Income from other state sources", "Total amount of revenue from other state sources",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("tCursGenAdmin", "Total Spening on General Admission", "Total schools spend on General Admission",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("perPupilSalaryWages", "Teacher Wages Per Pupil", "Total wages for teachers per pupil",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("pctTotState", "Percentage of Funding from State", "Percentage of funding recieved from the state",(dataset,col)=> `${emptyFilter(defaultHandler(dataset,col))} %`),
+	new ColumnRecord("tCapital", "Total Capital Outlay Expenditure", "Total amount spent on replacement or repair of items",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("fedrOthr", "Federal Funding (Other)", "Funding recieved from other federal sources",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("tIntrst", "Interest on School System Indebtedness", "Payment towards interest on school system indebtedness",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("locrPropTax", "Income from local property taxes", "Total income from local property taxes",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("perPupilTotSpending", "Spending Per Pupil", "How much the school spends per pupil",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("fedrNutr", "Federal child nutrition programs", "Total income from federal child nutrition programs",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("outstandingDebt", "Outstanding Debt", "Total Outstanding Debt",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("fedDis", "Total revenue for children with disabilities", "Total revenue from federal government for children with disabilties",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("strGenFormulaAss", "Total  income from state general formula assistance", "Total income from state general formula assistance (Includes school lunch program, title 1, etc.)",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("tCursStaffSupport", "Current spending on staff support", "Total Current Spending for Support Services - Instructional staff support",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("tCursPupil", "Total Current Spending Per Pupil", "The amount of money currently spent per pupil",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("tfedrev", "Total Revenue from Federal Goverment", "The amount of money recieved from the federal government",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("tCurOther", "Total Spending (Other)", "Total spending to other and nonspecified",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("longDebtIssued","Long-term debt issued during the fiscal year", "Amount of long-term debt issued during the fiscal year",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("tstrev", "Total Revenue from State", "Total revenue recieved from the state",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("tCursSchAdmin", "Total current spending on school administration", "Amount currently spent on school adminisration",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("locrParGovCont", "Local Parent Government Contrabutions", "Revenue from local parent government contributions",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("tCursOth", "Total Current Spending (Other)", "Total current spending to other sources",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("tCurInstructionBene", "Total current spending on Employee benefits for instruction", "Total amount current spending on Employee benefits for instruction",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("tEmployeeBen", "Total Employee Benefits", "Total amount spent on employee benefits",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("tCurInstructionSalWag", "Total Spending on Wages", "Total spending on salary and wages to teachers",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("tCurSupportServices","Total current spending on support services", "Total amount spent on support services",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("tCurInstruction", "Total spending on instruction", "Total amount of spending on instruction",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("totalExpenditure", "Total Expenditure", "Total Expenditure a school has",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("tSalWage", "Total spending on wages and salary", "Overall spending on wages and salary",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("totalrev", "Total Revenue", "Total Revenue the school recieve",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("tCurrSpnd", "Total Current Spending", "How much the school currently spends",(dataset,col)=> `$ ${emptyFilter(defaultHandler(dataset,col))}`),
+	new ColumnRecord("pctTotalRev", "Percentage of Total Revenue Spent", "Percentage of total revenue the school is spending",(dataset,col)=> `${emptyFilter(defaultHandler(dataset,col))}%`)
 ];
