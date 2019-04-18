@@ -10,7 +10,7 @@ export default class ColDisplay extends React.Component{
 					<h5> {this.props.Name} </h5>
                     <Table>
                         <tbody>
-						    {this.props.Cols.map(x=>
+						    {this.props.Cols.sort((a,b)=> a.Column_Friendly_Name.toLowerCase()<b.Column_Friendly_Name.toLowerCase()?-1:1).map(x=>
 							    RenderRowContent(x, this.props.dataset))
                                 }
                         </tbody>
