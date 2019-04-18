@@ -72,11 +72,34 @@ class SchoolDisplay extends React.Component{
             </Input>
         </div>);
     }
+    getNameInfo(){
+        let name = null;
+
+        if(this.props.Math_Scores)
+            name = name || this.props.Math_Scores.mathSchnam;
+        if(this.props.Read_Scores)
+            name = name || this.props.Read_Scores.readSchnam;
+        if(this.props.Geo)
+            name = name || this.props.Geo.name;
+        let district = null;
+
+        if(this.props.Math_Scores)
+            district = district || this.props.Math_Scores.mathLeanm;
+        if(this.props.Read_Scores)
+            district = district || this.props.Read_Scores.readLeanm;
+        if(this.props.Geo)
+            district = district || this.props.Geo.leanm
+        if(name && !district)
+            return name
+        if(name && district)
+            return name+", "+district;
+        return "";
+    }
     render(){
         return (<div>
 			<ErrorDisplay />
             <LoadingDisplay />
-            {this.props.Math_Scores?<h4>{this.props.Math_Scores.mathSchnam+", "+this.props.Math_Scores.mathLeanm}</h4>:null}
+            {this.props.Math_Scores || this.props.Read_Scores || this.props.Geo ?<h4>{this.getNameInfo()}</h4>:null}
             {this.props.Geo?<h5>{this.props.Geo.street+", "+this.props.Geo.city+", "+this.props.Geo.state+", "+this.props.Geo.zip}</h5>:null}
             <Table borderless={true} style={{ width: "75%" }}> 
                 <tbody>
