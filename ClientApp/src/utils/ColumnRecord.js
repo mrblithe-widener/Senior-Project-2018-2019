@@ -45,8 +45,8 @@ class ColumnRecord{
  */
 
 export function RenderRowContent(record, dataset) {
-    return (<tr key={record.Column_Name} >
-                <td key={record.Column_Name + "label"} data-toggle="tooltip" data-placement="bottom" title={record.Column_Description}>
+    return (<tr key={record.Column_Name} data-toggle="tooltip" data-placement="bottom" title={record.Column_Description}>
+                <td key={record.Column_Name + "label"} >
                     {record.Column_Friendly_Name}
                 </td>
                 <td key={record.Column_Name + "value"} >

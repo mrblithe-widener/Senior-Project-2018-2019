@@ -118,7 +118,7 @@ class SchoolDisplay extends React.Component{
                             [<td key={1} data-toggle="tooltip" data-placement="bottom" title={ReadCols[2].Column_Description}>
 							    {ReadCols[2].Column_Friendly_Name}
 						    </td>,
-                            <td key={2}>
+                            <td key={2}key={1} data-toggle="tooltip" data-placement="bottom" title={ReadCols[2].Column_Description}>
 							    {emptyFilter(ReadCols[2].handler(this.props.Read_Scores['readAllGradesNumvalid'], this.props.TeacherRatios.numFullTime))}
 						    </td>]:null}
                     </tr>
@@ -145,13 +145,13 @@ function readMathRender(dataset, cols){
         <td key={11} data-toggle="tooltip" data-placement="bottom" title={cols[0].Column_Description}>
             {cols[0].Column_Friendly_Name}
         </td>,
-        <td key={12}>
+        <td key={12} data-toggle="tooltip" data-placement="bottom" title={cols[0].Column_Description}>
             {emptyFilter(cols[0].handler(dataset, cols[0].Column_Name))}
         </td> ,
         <td key={21} data-toggle="tooltip" data-placement="bottom" title={cols[1].Column_Description}>
             {cols[1].Column_Friendly_Name}
         </td>,
-        <td key={22}>
+        <td key={22}data-toggle="tooltip" data-placement="bottom" title={cols[1].Column_Description}>
             {emptyFilter(cols[1].handler(dataset, cols[1].Column_Name))}
         </td>
 		];
