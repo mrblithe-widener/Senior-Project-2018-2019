@@ -7,7 +7,7 @@ import LoadingDisplay from "./LoadingDisplay";
 import ErrorDisplay from "./ErrorDisplay";
 import { errorActionCreators } from "../store/Error";
 import { MathCols, RenderRowContent, ReadCols, emptyFilter, GeoCols, TeacherRatioCols,
-Title1Cols, BusinessCols, IncomeCols } from "../utils/ColumnRecord";
+Title1Cols, BusinessCols, IncomeCols, FundingCols } from "../utils/ColumnRecord";
 import {Table, Input} from "reactstrap";
 import ColDisplay from "./ColDisplay";
 
@@ -20,7 +20,8 @@ class SchoolDisplay extends React.Component{
             new ColDisplayMetaData("Geo", "Geo", GeoCols, "Geographical Information"),
             new ColDisplayMetaData("Title1","Title1", Title1Cols, "Title 1"),
             new ColDisplayMetaData("Local Business Information", "Business", BusinessCols,"Local Business Information"),
-            new ColDisplayMetaData("Local Income Tax Information", "Income", IncomeCols, "Local Income Tax Information")
+            new ColDisplayMetaData("Local Income Tax Information", "Income", IncomeCols, "Local Income Tax Information"),
+            new ColDisplayMetaData("School Funding Information", "Funding", FundingCols, "School Funding Information")
         ];
     }
 
