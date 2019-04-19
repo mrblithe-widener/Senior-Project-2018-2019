@@ -20,15 +20,17 @@ export default class NavMenu extends React.Component {
   render () {
     return (
       <header>
-        <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" light >
+        <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 bg-primary" light >
           <Container>
-            <NavbarBrand tag={Link} to="/">School Info</NavbarBrand>
+            <NavbarBrand tag={Link} to="/" className="text-white">School Info</NavbarBrand>
             <NavbarToggler onClick={this.toggle} className="mr-2" />
-            <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={this.state.isOpen} navbar>
+            <Collapse className="d-sm-inline-flex flex-sm-row-reverse text-white" isOpen={this.state.isOpen} navbar>
               <ul className="navbar-nav flex-grow">
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
-                  <NavLink tag={Link} className="text-dark" to="/report">Report</NavLink>
+                  <NavLink tag={Link} className="text-white" to="/">Home</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={Link} className="text-white" to="/report">Report</NavLink>
                 </NavItem>
               </ul>
             </Collapse>
