@@ -17,11 +17,11 @@ class SchoolDisplay extends React.Component{
         super(props);
         this.state = { hasRequestedOthers: false, active: "" };
         this.ColDisplays = [
-            new ColDisplayMetaData("Geo", "Geo", GeoCols, "Geographical Information"),
-            new ColDisplayMetaData("Title1","Title1", Title1Cols, "Title 1"),
-            new ColDisplayMetaData("Local Business Information", "Business", BusinessCols,"Local Business Information"),
-            new ColDisplayMetaData("Local Income Tax Information", "Income", IncomeCols, "Local Income Tax Information"),
-            new ColDisplayMetaData("School Funding Information", "Funding", FundingCols, "School Funding Information")
+            new ColDisplayMetaData("Geo", "Geo", GeoCols, "Geographical Information",""),
+            new ColDisplayMetaData("Title1","Title1", Title1Cols, "Title 1",""),
+            new ColDisplayMetaData("Local Business Information", "Business", BusinessCols,"Local Business Information",""),
+            new ColDisplayMetaData("Local Income Tax Information", "Income", IncomeCols, "Local Income Tax Information","The money amounts are reported in thousands of dollars."),
+            new ColDisplayMetaData("School Funding Information", "Funding", FundingCols, "School Funding Information", " All amounts, except for fall membership and personal income, are expressed in thousands of dollars. Fall membership data are presented in whole amounts. Personal income totals are expressed in millions of dollars.")
         ];
     }
 
@@ -56,7 +56,7 @@ class SchoolDisplay extends React.Component{
 
 
     renderDisplay() {
-        return <div> {this.ColDisplays.map(x => <ColDisplay key={x.name} show={this.state.active === x.name} Cols={x.Cols} dataset={this.props[x.dataset]} Name={x.FriendlyName} />)}</div>
+        return <div> {this.ColDisplays.map(x => <ColDisplay key={x.name} show={this.state.active === x.name} Cols={x.Cols} dataset={this.props[x.dataset]} Name={x.FriendlyName} Message={x.Message} />)}</div>
     }
 
     handleColDisplayChange(e) {
@@ -132,11 +132,12 @@ class SchoolDisplay extends React.Component{
 }
 
 class ColDisplayMetaData{
-    constructor(name, dataset, Cols, FriendlyName){
+    constructor(name, dataset, Cols, FriendlyName, Message){
         this.name = name;
         this.dataset = dataset;
         this.Cols = Cols;
         this.FriendlyName = FriendlyName;
+        this.Message = Message;
     }
 }
 

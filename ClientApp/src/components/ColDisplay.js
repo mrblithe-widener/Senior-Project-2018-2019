@@ -7,7 +7,8 @@ export default class ColDisplay extends React.Component{
 		if(this.props.show && this.props.Cols && this.props.dataset)
 			return (
 				<Jumbotron>
-					<h5> {this.props.Name} </h5>
+                    <h5> {this.props.Name} </h5>
+                    <h6> {this.props.Message} </h6>
                     <Table>
                         <tbody>
 						    {this.props.Cols.sort((a,b)=> a.Column_Friendly_Name.toLowerCase()<b.Column_Friendly_Name.toLowerCase()?-1:1).map(x=>
