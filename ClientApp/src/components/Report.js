@@ -94,15 +94,15 @@ export class Report extends React.Component{
 
                         </Table>
                         <h1>Funding Compare Between Top/Worst Schools </h1>
-                        <p>The Funding looks at the Per Pupil Spending Data provided in the Funding dataset. The Per Pupil Spending Data is derived by the Current Spending per School District/ the #  of Students enrolled in that School District. The Current Spending is defined as the amount of money the school district receives  for spending on salaries, benefits, purchased service, property, and supplies.  </p>
+                        <p>The funding looks at the per pupil spending data provided in the Funding dataset. The per pupil spending data is derived by the current spending per school district/ the #  of students enrolled in that school district. The current spending is defined as the amount of money the school district receives  for spending on salaries, benefits, purchased service, property, and supplies.  </p>
                         <p>Overall Average Per Pupil Spending for ALL School Districts is $13,185.78 </p>
                         <p> Range ($0 - $5,320,000) </p>
                         <p> The focus of this analysis was to look at and understand why particular schools fail standardized tests scores at a high rate.  To isolate the school districts which we are focusing on, schools were filtered such that they had a proficiency level of 25% or less in both Reading in Math scores. This yielded a total of 7,297 schools into this category. Since we are looking at school districts and not individual schools, a threshold of school districts with at least 3 failing schools in this category was applied. This yielded an answer of 5,058 schools.  </p>
-                        <p> The average FAILING (25% or Lower) Per Pupil Spending for School Districts is $12,678.38</p>
+                        <p> The average FAILING (25% or Lower) Per Pupil Spending for school districts is <strong>$12,678.38</strong></p>
                         <p> Range ($ 5,841 - 76, 777) </p>
-                        <p> Table II and Table III highlights the top 7 schools districts with school the highest amounts of schools falling at a 25 % or lower rate. In total there this is 860 Schools. This is 12% of our original 7,297 number and 17% of our 5,058 number! Moreover, 5 out of the 7 worst performing school districts actually have a HIGHER Per Pupil Spending than our Failing Rate highlighted above.  </p>
-                        <p> To get a comparison to the numbers, the data was rearranged such that Schools which passed at a 75% or higher rate in Reading and Math was displayed.  In total there were 10,538 which fell into this category. Again the same process was done on these numbers and below are the results.  </p>
-                        <p> The age PASSING (75% or Above) Per Pupil Spending for School Districts is $13,489.77 </p>
+                        <p> Table II and Table III highlights the top 7 schools districts with school the highest amounts of schools falling at a 25 % or lower rate. In total there this is 860 Schools. This is 12% of our original 7,297 number and 17% of our 5,058 number! Moreover, 5 out of the 7 worst performing school districts actually have a HIGHER per pupil spending than our failing rate highlighted above.  </p>
+                        <p> To get a comparison to the numbers, the data was rearranged such that schools which passed at a 75% or higher rate in Reading and Math was displayed.  In total there were 10,538 which fell into this category. Again the same process was done on these numbers and below are the results.  </p>
+                        <p> The age PASSING (75% or Above) per pupil spending for school districts is <strong> $13,489.77 </strong> </p>
                         <p> Range ($0 - $270,059) </p>
                         <p> Looking school districts with the top 7 passing schools (478 total) 5 out of the 7 have a lower Per Pupil Spending than our Failing Average. </p>
                         <h4 > Table II: Funding Breakdown for School Districts with Schools That Passed at a 75 % or High Clip in Math and Reading </h4>
@@ -173,7 +173,7 @@ export class Report extends React.Component{
 
                         </Table>
                         <h1> Conclusion   </h1>
-                        <p> Money per student or money a school receives has little to no indication of how well a school performs on standardized testing. Not only is the differential between the average Per Pupil Spending number between Passing and Failing schools minimal, BUT 5 out the 7 best Passing School districts actually have less money per student (thousands of dollars) than the schools that are failing at a rate of 25 % or less in math and reading. A better indicator would by the average student to teacher ratio of that school district. Ultimately, failing school districts need to reassess their resources and how they are spending their money, because it appears they have the money to higher on more teachers. </p>
+                        <p> Money per student or money a school receives has little to no indication of how well a school performs on standardized testing. Not only is the differential between the average per pupil spending number between passing and failing schools minimal, BUT 5 out the 7 best passing school districts actually have less money per student (thousands of dollars) than the schools that are failing at a rate of 25 % or less in math and reading. A better indicator would by the average student to teacher ratio of that school district. Ultimately, failing school districts need to reassess their resources and how they are spending their money, because it appears they have the money to higher on more teachers. </p>
                     </div>
             </div>
             ):null}
