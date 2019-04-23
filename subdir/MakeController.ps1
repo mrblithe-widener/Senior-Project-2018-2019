@@ -1,1 +1,0 @@
- dotnet-aspnet-codegenerator controller -name "Title1Controller" -api -m SeniorProjectWebsite.Models.Title1 -dc seniorprojectContext -outDir Controllers -namespace SeniorProjectWebsite.Controllers
