@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Jumbotron, Table} from "reactstrap";
-
+import { Link } from "react-router-dom";
 
 /**
  * Displays the content for the report
@@ -176,7 +176,8 @@ export class Report extends React.Component{
                         <p> Money per student or money a school receives has little to no indication of how well a school performs on standardized testing. Not only is the differential between the average per pupil spending number between passing and failing schools minimal, BUT 5 out the 7 best passing school districts actually have less money per student (thousands of dollars) than the schools that are failing at a rate of 25 % or less in math and reading. A better indicator would by the average student to teacher ratio of that school district. Ultimately, failing school districts need to reassess their resources and how they are spending their money, because it appears they have the money to higher on more teachers. </p>
                     </div>
             </div>
-            ):null}
+            ) : null}
+            <a href={process.env.PUBLIC_URL + "DatasetsForDownload.zip"}> Download Datasets </a>
         </div>);
 
     }
