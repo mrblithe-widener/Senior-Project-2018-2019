@@ -177,7 +177,7 @@ export class Report extends React.Component{
                     </div>
             </div>
             ) : null}
-            <a href="#" download={process.env.PUBLIC_URL + "DatasetsForDownload.zip"}> Download Datasets </a>
+            <a href={process.env.PUBLIC_URL + "/downloads/DatasetsForDownload.zip"} download={"DatasetsForDownload.zip"}> Download Datasets </a>
         </div>);
 
     }
